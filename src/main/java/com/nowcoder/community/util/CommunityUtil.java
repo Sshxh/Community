@@ -6,11 +6,8 @@ import org.springframework.util.DigestUtils;
 import java.util.Map;
 import java.util.UUID;
 
-/**
- * @author Ep流苏
- * @Date: 2020/6/14 16:29
- * @Description:
- */
+//这个工具类是用来当用户设置完密码之后 对密码进行加工的一个工具
+//函数md5最终生成对应的md5码
 public class CommunityUtil {
 
 	/**

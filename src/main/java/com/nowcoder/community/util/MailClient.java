@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
-
+//这个工具类是springboot发邮箱给特定的用户 用来进行邮箱验证的工具类
 @Component
 public class MailClient {
 
@@ -23,6 +23,7 @@ public class MailClient {
     @Value("${spring.mail.username}")
     private String from;
 
+    //to表示的是要发邮件到哪个邮箱 subject是一个主题 发文件的内容是content
     public void sendMail(String to, String subject, String content) {
         try {
             MimeMessage message = mailSender.createMimeMessage();

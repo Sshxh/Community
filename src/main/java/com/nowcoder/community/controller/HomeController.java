@@ -27,12 +27,15 @@ public class HomeController {
 
     @RequestMapping(path = "/index", method = RequestMethod.GET)
     public String getIndexPage(Model model, Page page) {
-        // 方法调用钱,SpringMVC会自动实例化Model和Page,并将Page注入Model.
+        // 方法调用前,SpringMVC会自动实例化Model和Page,并将Page注入Model.
         // 所以,在thymeleaf中可以直接访问Page对象中的数据.
+
+        //Model和Page携带我们需要的数据到我们的跳转html.
         page.setRows(discussPostService.findDiscussPostRows(0));
         page.setPath("/index");
 
         List<DiscussPost> list = discussPostService.findDiscussPosts(0, page.getOffset(), page.getLimit());
+        //这里用了一个map 很巧妙 就可以把数据更好的保存
         List<Map<String, Object>> discussPosts = new ArrayList<>();
         if (list != null) {
             for (DiscussPost post : list) {
@@ -44,6 +47,8 @@ public class HomeController {
             }
         }
         model.addAttribute("discussPosts", discussPosts);
+
+        //在url为index的时候会相应到idnex.html文件
         return "/index";
     }
 }

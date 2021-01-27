@@ -7,11 +7,15 @@ public class User {
     private int id;
     private String username;
     private String password;
-    private String salt;
     private String email;
+    //这个salt是每个用户注册的时候会对它的密码进行加密的过程中添加一个复制的随机字符串
+    private String salt;
     private int type;
+    //status表名这个用户是否是正确被注册的 状态1表示成功 '0-未激活; 1-已激活;',
     private int status;
+    //每个用户被注册会有一个注册的码 当用户第一次注册的时候会生成一个用户的注册吗来验证
     private String activationCode;
+    //这个是每个用户头像url的地址
     private String headerUrl;
     private Date createTime;
 
