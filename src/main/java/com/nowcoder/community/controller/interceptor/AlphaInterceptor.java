@@ -22,19 +22,20 @@ public class AlphaInterceptor implements HandlerInterceptor {
     //在controller之前执行
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        logger.debug("preHandle "+handler.toString());
+        logger.debug("preHandle: "+handler.toString());
         return true;
     }
-
 
     //在controller之后执行
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, @Nullable ModelAndView modelAndView) throws Exception {
+        logger.debug("postHandle: "+handler);
     }
 
-
+    //在TemplateEngine之后执行
     @Override
      public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, @Nullable Exception ex) throws Exception {
+        logger.debug("agterCompletion: "+handler);
     }
 
 
