@@ -131,6 +131,16 @@ public class UserService implements CommunityConstant {
      * @return Map 携带msg提示信息
      */
 
+    /**
+     * 如果账号有问题 Map装字段 usernameMsg
+     * 如果密码有问题  Map装字段 passwordMsg
+     *
+     * @param username
+     * @param password
+     * @param expiredSeconds
+     * @return
+     */
+
     public Map<String, Object> login(String username, String password, int expiredSeconds) {
         Map<String, Object> map = new HashMap<>();
 
@@ -168,6 +178,7 @@ public class UserService implements CommunityConstant {
         LoginTicket loginTicket = new LoginTicket();
         loginTicket.setUserId(user.getId());
         loginTicket.setTicket(CommunityUtil.generateUUID());
+        //这个状态0 表示是一个激活的状态
         loginTicket.setStatus(0);
         loginTicket.setExpired(new Date(System.currentTimeMillis() + expiredSeconds * 1000));
         loginTicketMapper.insertLoginTicket(loginTicket);
@@ -180,6 +191,7 @@ public class UserService implements CommunityConstant {
         loginTicketMapper.updateStatus(ticket,1);
     }
 
+    //我们可以通过ticket字段来获取登陆的凭证
     public LoginTicket findLoginTicket(String ticket){
         LoginTicket loginTicket = loginTicketMapper.selectByTicket(ticket);
         return loginTicket;

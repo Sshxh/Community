@@ -51,7 +51,7 @@ public class HomeController {
         }
         model.addAttribute("discussPosts", discussPosts);
 
-        //在url为index的时候会相应到idnex.html文件
+        //在url为index的时候会相应到index.html文件
         return "/index";
     }
 
