@@ -123,7 +123,8 @@ public class LoginController implements CommunityConstant {
     @RequestMapping(path = "/login", method = RequestMethod.POST)
     public String login(String username, String password, String code, boolean rememberme,
                         Model model, HttpSession session, HttpServletResponse response) {
-        // 检查验证码
+
+        // 检查验证码（因为这个我们保存在session中，所以不是service做的事情）
         String kaptcha = (String) session.getAttribute("kaptcha");
         if (StringUtils.isBlank(kaptcha) || StringUtils.isBlank(code) || !kaptcha.equalsIgnoreCase(code)) {
             model.addAttribute("codeMsg", "验证码不正确!");
@@ -133,6 +134,9 @@ public class LoginController implements CommunityConstant {
         // 检查账号,密码
         int expiredSeconds = rememberme ? REMEMBER_EXPIRED_SECONDS : DEFAULT_EXPIRED_SECONDS;
         Map<String, Object> map = userService.login(username, password, expiredSeconds);
+
+        //pre：已经经过userService验证能够正确的生成一个登陆凭证
+        //after：现在从map中将ticket装入cookie中 之后可以通过这个cookie来检测验证码是否正确
         if (map.containsKey("ticket")) {
             Cookie cookie = new Cookie("ticket", map.get("ticket").toString());
             cookie.setPath(contextPath);
@@ -148,7 +152,7 @@ public class LoginController implements CommunityConstant {
 
 
     /**
-     * 推出登陆
+     * 退出登陆
      */
     @RequestMapping(path = "/logout",method = RequestMethod.GET)
     public String logout(@CookieValue("ticket") String ticket){

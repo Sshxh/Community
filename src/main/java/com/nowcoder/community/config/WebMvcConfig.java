@@ -7,6 +7,12 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+/**
+ *配置拦截器的拦截路径 包括了下面两个路径的选择
+ *  excludePathPatterns();
+ *   addPathPatterns();
+ */
+
 @Configuration
 public class WebMvcConfig implements WebMvcConfigurer {
     @Autowired
