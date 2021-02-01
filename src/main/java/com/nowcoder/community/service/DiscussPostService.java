@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.util.HtmlUtils;
 
 import java.util.List;
-
 @Service
 public class DiscussPostService {
 
