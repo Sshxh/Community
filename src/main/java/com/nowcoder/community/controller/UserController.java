@@ -47,6 +47,8 @@ public class UserController {
     @Autowired
     private HostHolder hostHolder;
 
+
+
     //这里的注解作用是 如果没有登陆直接访问是会被拦截下来
     @LoginRequired
     @RequestMapping(path = "/setting",method = RequestMethod.GET)
